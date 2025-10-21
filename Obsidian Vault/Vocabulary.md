@@ -1,0 +1,110 @@
+- nuts
+	- crazy or insane, also very enthusiastic about something
+- bolts
+- crunching
+	- to process large amount of data quickly
+- evenly
+	- in a level, smooth or regular way
+- sentiment analysis = Natural Language Processing (NLP)
+- perhaps
+	- possible but not certainly or maybe
+- appeal
+	- serious request
+	- be attractive
+- bleeding-edge
+	- the most advanced, experimental and risky stage of development
+- draw
+	- to move / pull / create an image / arrive / attract / conclude / extract something
+- held
+	- past of "to hold"
+	- to grasp / keep / reserve something
+		- physical
+			- grasp / carrying / containing
+		- mental
+			- believe / consider
+- glue
+	- a sticky to bond
+- from the ground up
+	- from the very beginning, starting with the most basic elements or foundation
+- dozens
+	- twelve things
+	- a lot or many of something
+- munging
+	- the cleaning, transforming, and reformatting of raw data into a usable format for analysis or other processes.
+- dicing
+	- cutting into uniform parts
+- either
+	- one or the other of two
+	- likewise or also when used after a negative statement
+- likewise
+	- in the same way / similarly / also
+- geared
+	- to be prepared / adjusted designed for a specific purpouse.
+- straightforward
+	- direct and honest or simple and easy to understand
+- such
+	- Adjective
+		- degree
+			- To emphasize the extreme quality or extent of something
+		- kind
+			- To indicate a person or thing of the same type as another
+	- Pronoun
+		- To refer to a person or thing that has been stated or exemplified
+	- Adverb
+		- To a very great degree; so or very
+	- "such as"
+		- To introduce one or more examples of something
+	- "such ... that"
+		- To show cause-and-effect relationship based on a great degree
+- degree
+	- unit of measurement
+	- academic qualification from a university
+	- a stage or intensity of something
+	- level of rank
+	- severity
+- murder
+	- unlawful, intentional killing
+	- Informal
+		- to describe something extremely difficult, dangerous
+		- to completely defeat
+		- ruin something or someone
+- clever
+	- someone quick to learn
+	- skill or object that is result of a clever invention
+- tailor-made
+	- specifically designed or fitted for a particular person, purpose or need
+- underneath
+	- Adverb:
+		- in a lower position
+		- on the underside
+	- Preposition:
+		- directly below
+		- under a person's control
+	- Figurative:
+		- the true character or reality
+- rightmost
+	- farthest to the right
+	- located on the rightmost side of something
+- farthest
+	- adjective:
+		- most distant
+		- most extended or longest
+	- adverb
+		- to the greatest distance
+		- to the most advanced
+	- superlative form of "far"
+- shallow
+	- Literal:
+		- physical depth: not deep from top to bottom
+		- biology: refers to plants with roots that don't go far into the ground
+	- Figurative:
+		- intellectual/emotional depth: describes people who lack deep thought
+		- figurative depth: something that is only superficial.
+- streamline
+	- Context of physical objects:
+		- designing for efficiency
+	- Context of processes and systems
+		- simplifying tasks
+		- modernizing for productivity
+- tailored
+	- make or adapt for a particular purpose or person

@@ -1,0 +1,37 @@
+# Vocabulary
+- backward-compatible
+	- new system can work with older versions of itself.
+- stuck
+	- past participle of "to stick"
+	- unable to move from a fixed position or to continue with something.
+- favor
+	- approval or support of someone or something
+- raw
+- pretty much
+- figure out
+
+# The Basics
+- Getting Python
+- Zen
+- Whitespace Formatting
+	- is ignored inside parentheses and brackets
+	- \ to indicate that statement continues onto the next line
+	- IPython: use %paste to do a correctly paste
+- Modules
+	- import *module*
+	- import *module* as *alias*
+	- from *module* import *function1*, *function2*
+	- from *module* import \*
+- Arithmetic
+- Functions
+	- anonymous functions
+		- lambda x: x + 4
+	- default arguments
+- Strings
+	- \\t to tab character
+	- r" ": raw string
+	- multi-line: triple-\[double]-quotes
+- Exceptions
+	- try and except
+- Lists
+	- 

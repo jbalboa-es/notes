@@ -1,0 +1,422 @@
+# Clase 01: Calidad de SW
+- Disciplina que se ocupa de la construcción sistematica, eficaz y eficiente de software
+- Objetivos
+	- Maximizar calidad
+	- Maximizar productividad
+	- Minimizar riesgos
+- El modelo SQuaRE: Intenta agrupar:
+	- Visiones de Calidad:
+		- Trascendental: Calidad ideal.
+		- Del usuario: Necesidades de los usuarios.
+		- Del productor: Énfasis en RFT y minimización de re-trabajo. La calidad del producto es un efecto lateral de la calidad del proceso.
+		- Del producto: Control de propiedades internas, resulta en producto de mejor calidad.
+- Costos
+	- De la calidad: 
+		- prevención
+		- evaluación
+	- De la no calidad:
+		- re-trabajo
+- Triángulo FGC (Fast - Good - Cheap): Tratar de priorizar solo 2, las 3 es generalmente inviable.
+
+### Modelo SQuaRE:
+- Calidad de uso:
+![[Pasted image 20250924143629.png]]
+- Calidad de producto:
+![[Pasted image 20250924143536.png]]
+- PPT:
+![[Pasted image 20250924143819.png]]
+- Sistemas criticos
+	- Seguridad
+	- Confiabilidad
+	- Integridad
+	- Disponibilidad
+- Aplicaciones de usuario
+	- Usabilidad
+	- Perfomance
+	- Escalabilidad
+- Para desarrollo
+	- Mantenibilidad
+	- Portabilidad
+	- Testabilidad
+
+- Extra: Un enfoque right first time (correcto a la primera) es un principio de gestión de calidad centrado en completar un proceso, tarea o actividad correctamente desde el primer intento, sin necesidad de errores, repeticiones o correcciones posteriores.
+
+# Clase 02: Intro a Requisitos
+
+- Un requerimiento es algo que el sistema debe ser capaz de hacer para cumplir con su próposito
+- Dificultades
+	- Ambiguedad del lenguaje natural
+	- Diferentes perspectivas
+	- Requisitos cambiantes
+	- Conocimiento implícito
+	- Conflictos entre requisitos
+## Tipos:
+###  Funcionales
+
+- Verbos
+- Evitar imprecisiones
+- Usualmente primero alto nivel (de usuario) y luego bajo (de sistema).
+- Testeable
+- Qué debe hacer, no cómo
+- Una sola cosa
+## No Funcionales
+- Adverbios
+- Métricas
+	- Velocidad: transacción por segundo - tiempo de respuesta
+	- Tamaño: MB
+	- Facilidad de uso: tiempo de entrenamiento - cantidad de páginas de ayuda
+	- Reliability: 
+		- tiempo medio hasta el fallo: tiempo en que activo no reparable funcionará antes de fallar por completo.
+		- probabilidad (pbb) de fallar
+	- Robustez: tiempo necesario para reiniciar después de falla - pbb de corrupción de datos tras falla
+	- Portabilidad: % de líneas que dependen de la arq (sistema, dispositivos, etc) - \# de sistemas objetivo
+
+## Análisis
+
+- Levantamiento
+	- Obtener requerimientos (investigación) 
+- Especificación
+	- Redacción y modelamiento
+- Análisis
+	- Revisar y resolver incosistencias
+- Validación: Visto bueno del cliente/usuario
+	- Checklist para Validación de Requerimientos:
+		- Son correctos
+		- Son consistentes
+		- Están completos
+		- Son realistas
+		- Son verificables
+		- Describen una sola cosa
+		- Son rastreables
+- Objetivo: Generar un documento de requistos
+	- Para cliente
+	- Jefe de proyecto
+	- Ingenieros
+	- QA
+#### Evitar
+- Futuro condicional
+- Comparacion vaga
+- Requisitos con multiples funcionalidades
+- Falta de criterios de aceptacion claros
+### Historias de usuario
+
+Como *cierto tipo de usuario*, quiero *lograr alguna meta* por *cierta razón*
+
+# Clase 03: Requisitos
+
+## Elicitación
+- Identificar
+	- Actores del sistema: tipos de usuarios - roles - sistemas externos
+	- Requisitos: F y NF
+	- Típicos escenarios de uso
+- Anticipar los "Ok, pero"
+- Acotar esfuerzo de elicitación
+	- Primero problemas que sistema pretende solucionar
+	- Deseable pero prescindible: Solo si quedan recursos
+- Usuarios no saben lo que quieren
+	- Probar nueva técnicas de elicitación (según tipo de desarrollo, de aplicación a desarrollar, presupuesto y cantidad de tiempo disponible, grado de participación de usuarios, etc.)
+		- Entrevistas y cuestionarios
+			- Estructurada: Cuestionario elaborado por equipo de desarrollo
+			- No-estructurada: Sin agenda predefinida
+				- Mejor combinar ambos
+			- Formas
+				- Oral
+				- Escrita
+				- Individual
+				- Grupal
+		- Brainstorming: Generación y consolidación/refinamiento de ideas. Todos participan.
+		- Observación: Observar mientras hacen trabajo sin interrumpir.
+		- Escenarios: Describir como el sistema será usado. (Paso inicial para Casos de Uso)
+			- "As-is": Estado actual
+			- "Visionarios": Describen sistema a crear
+		- Casos de Uso
+			- Diagrama de casos de uso de alto nivel
+				- Interior, lo que el sistema soportará (requisitos F)
+				- Exterior para definir alcance del sistema, considerando que actores:
+					- Pueden colaborar en misma tarea
+					- Puden ser usuarios o sistemas externos
+			- Cada caso se complementa con descripción narrativa de la interacción. 
+				- Modelo Dinámico de análisis del sistema.
+			- Información básica
+				- Nombre de caso de uso, comienza con verbo
+				- Actores
+				- Propósito: Intención 
+				- Resumen: De alto nivel. (Vision general)
+				- Tipo: Primario, Secundario u Opcional. Esencial o Real.
+				- Descripción: De pasos para llevar a cabo
+				- Referencias cruzadas: Otro caso de uso y/o funciones relacionadas al sistema
+			- Esencial expandido casos mas importantes.
+			- Postergar casos reales hasta diseño
+			- Cuidado con representar pasos, operaciones o transacciones individuales como caso de uso. Solo considerar el proceso más amplio
+		- Prototipos
+- Usuarios creen saber lo que quieren, hasta entrega
+	- Proveer retroalimentación temprana
+- Analista cree entender mejor
+	- Poner al analista en el lugar del usuario
+- Establecer confianza
+
+# Clase 04: Diseño de interacciones
+- Una vez que indentificamos:
+	- Requerimientos
+	- Distintos tipos de usuarios
+	- Tareas del sistema
+	- Algunos escenarios de uso
+- Debemos describir los elementos físicos con que se relacionará un usuario para realizar tarea:
+	- Wireframes: Representacion simplificada de página/ventana
+		- Dibujo de línea con texto
+		- Incluye contenido y elementos estructurales
+		- No enfocado en diseño visual (colores, estilos,etc.)
+		- Para:
+			- Comunicar ideas
+			- Determinar factibilidad técnica
+			- Blueprint para diseñadores graficos y desarrolladores
+			- Probar diseños alternativos
+		- Pasos:
+			- Escoger un escenario, usuarios, tarea
+			- Descripción de interfaz
+				- Ejemplo para probar interfaz
+			- Bosquejo
+			- Prototipar
+		- Principios para diseño efectivo:
+			- ![[Pasted image 20250924151328.png]]
+				- Inconsistencia deliberada: Quebrar consistencia cuando elemento no se comporta como se espera.
+				- Continuidad: Entre versiones
+				- Interfaces explorables: Interfaz invitar la exploración
+				- Interfaz como una ilusión: Evitar replicar decisiones de implementación en la interfaz
+				- Tiempo: No gastar tiempo de usuario para ahorrarle al programador
+				- Modalidades de uso: indicarlas claramente, por ejemplo, navegar vs buscar que se note cuando se está en una o en otra.
+
+# Clase 05: Usabilidad
+
+- Es análisis culitativo:
+	- Pocos usuarios
+	- Observar comportamiento de los usuarios, tratando de generalizar
+- Métodos comunes
+	- Antes de diseñar:
+		- Cuestionarios: Más mejor
+			- Validacion problemas conocidos, estudios cuantitativos
+		- Field studies: Observar a 5-7 sujetos
+			- Entender contexto real de estudio
+		- Diary studies: que 5-7 sujetos lleven registro de sus actividades
+			- Entender patrones de comportamiento a largo plazo
+			- Evento de interes ocurre infrecuentemente
+			- No hay recursos para Field studies
+	- Durante el diseño:
+		- User testing: paper prototypes vs live apps
+			- Validar diseños especificos y encontrar problemas de usabilidad
+	- Después de entrega:
+		- User testing
+		- Eye tracking (seguimiento de ojos)
+			- Analisis detallado de atencion visual
+- UT
+	- Usuario: Realiza tareas y piensa en voz alta. Público objetivo
+	- Facilitador: Indica tareas
+	- Observadores: Toma nota y preguntas al final
+	- Cuando?
+		- Testear como anda, utilidad, ante muchas quejas, ante pocas descargas/visitas, ante poca finalizacion de tareas, agregar mas features
+	- Para?
+		- Encontrar feature
+		- Usabilidad de esta
+		- Facilidad de lograr y entender
+	- Costos
+		- Reclutamiento
+		- Incentivos
+		- Compras en la app
+		- Tiempo preparacion
+		- Ejecution de test (tiempo)
+	- Usuarios moviles
+		- Basico: Experiencia usando dispositivo
+		- Entusiasta: Uso intensivo de apps
+	- Filtro
+		- Screener
+			- Objetivo sesion
+			- Duracion, fecha y ubicacion de sesion
+			- Incentivos
+			- Preguntas de filtrado
+	- Tipos
+		- Dirigida
+		- Abierta
+		- Ad hoc: Tomar en cuenta lo que saben del usuario y las apps/sitios que usan. Considerar el conocimiento del usuario al escogerlo
+	- Algunas métricas cuantitativas que podemos colectar: (Sin depender mucho de éstas)
+		- Tasa de éxito de las tareas
+		- Duracion tareas
+		- Tiempo que demora bajar, instalar y laanzar app
+		- Valoraciones subjetivas
+		- Preferencias
+	- Pasos:
+		- Presentarse
+		- Explicar en que consiste
+		- Aclarar que test es sobre app
+		- Explicar que se requiere opinion honesta
+		- Pedir permiso para grabar
+		- Como se haran los reembolsos en caso de compras
+		- Pedir firma de consentimiento
+		- Explicar usuario piense voz alta
+		- Que sean autonomos
+		- Revisar posicion de camaras.
+		- Fijarse progresión - nivel de comodidad - comportamiento observadores
+		- Tomar notas y llevar cuenta del tiempo
+	- Usuario manda, debemos cumplir con nuestra palabra y proteger su información sensible en caso de.
+	- Analisis de datos
+	- Reporte de usabilidad
+- Diary studies
+	- Costo
+		- Reclutamiento
+		- Incentivos
+		- Tiempo de preparación
+		- Comunicación con usuarios
+		- Revision de logs
+	- Analisis de datos
+		- Buscar tendencia
+		- Listar hallazgos
+- Field studies:
+	- UT pero en varios usuarios y en su ambiente natural.
+	- Tambien se diferencia en que es para buscar o investigar mas que para testear.
+
+# Clase 06: Procesos agiles
+
+- Proceso: Serie de pasos que involucran actividades, restricciones y recursos, y que producen una salida.
+	- Caracteristicas fundamentales:
+		- Impone consistencia y estructura al conjunto de actividades
+		- No es procedimiento, si no conjunto de estos
+		- Permite/sugiere técnicas y herramientas
+		- Estructura del proceso guía la accion
+		- Permite capturar y transmitir experiencia de un proyecto a otro
+	- ¿ Por qué modelarlos?
+	- Entendimiento comun
+	- Detectar problemas
+	- Alineacion con objetivos
+	- Adaptabilidad
+- Filosofía agíl
+	- Individuos e interacciones sobre procesos y herramientas.
+	- Software funcionando sobre documentacion comprehensiva
+	- Colaboracion con cliente sobre negociacion contractual
+	- Responder al cambio sobre seguir un plan
+- Caracteristicas Modelos Ágiles
+	- Documentacion minima
+	- Ciclos iterativos breves
+	- Reaccion rapida ante los cambios
+	- Estrecha relacion con cliente
+	- Diseño simple
+	- Satisfaccion necesidades minimas
+	- Foco en las personas
+	- Organizacion libre
+	- Procesos adaptables, no predictivos
+- Scrum
+	- Pasos:
+		- Product Backlog  (Estimation meeting)
+			- Lista de funcionalidades deseadas
+		- Planning meating
+		- Sprint Backlog
+			- Subconjunto de Product Backlog
+			- Plan detallado de trabajo
+		- Daily Scrum Meeting
+		- Pottentially shippable product increment (Sprint review)
+			- Producto funcionando al final de cada sprint
+			- Potencialmente desplegable
+		- Retrospective & Impediment backlog
+	- Conceptos clave
+		- Proceso empírico: Planificacion detallada por anticipador y procesos revisados en ciclo.
+		- Auto-organizacion: Equipo autogestiona y organiza, con restricciones claras.
+		- Tres roles principales
+			- Product Owner: Dueño
+				- Define qué construir
+				- Mantiene el Product Backlog
+				- Prioriza funcionalidades
+				- Representa voz del cliente.
+				- Gestiona vision y requerimientos del producto.
+			- Scrum Master: Gestionador/Facilitador
+				- Gestiona el proceso de desarrollo
+				- Elimina impedimentos
+				- Facilita reuniones
+			- Equipo de trabajo:
+				- Auto-organizado y multifuncional
+				- Decide cómo construir el producto
+	
+# Clase 07: Trabajo en equipo
+
+- Las 4C:
+	- Comunicación: Hablas y escuchar
+	- Coordinación: Planificación del trabajo
+	- Cooperación: Compartir información entre sí para lograr metas individuales
+	- Colaboración: Equipo con habilidades complementarias, que trabajan juntos para meta en común.
+- Pref trabajo individual:
+	- Razones peronsales
+	- Tipo de proyecto
+	- Dinámicas de equipo
+		- Pesimismo
+		- Competitividad
+		- Falta de compromiso/responsabilidad
+		- Mala división de tareas
+		- Diferencias en tasas de trabajo
+		- Liderazgo débil
+- Equipos efectivos, que se complementen en:
+	- Conocimientos
+	- Habilidades
+	- Roles
+	- Personalidades
+- Tips para equipo efectivo:
+	- Definir metas
+	- Todos entienden y están de acuerdo
+	- Balance trabajo
+	- Coordinadores claros
+	- Ambiente de apoyo
+	- Miembos sienten que pueden decir lo que piensan
+	- Espacio para discusión
+	- Todos se sienten escuchados
+	- Se llegan a consensos como equipo
+	- Se permiten criticas constructivas
+	- Equipo aprende de experiencias
+- Problemas comunes:
+	- Comunicacion
+	- Organizacion
+	- Actitudes
+	- Calidad del trabajo
+- Conflictos inevitables
+	- Causas
+		- Valores
+		- Actitudes
+		- Necesidades
+		- Expectativas
+		- Percepciones
+		- Recursos
+		- Personalidades
+- Estrategias de resolución: (Según compromiso)
+	- Dominante (Una parte gana a toda costa)
+		- Alta asertividad, baja cooperacion
+		- Se busca satisfacer necesidades propias a costa de otros
+		- Cuando usar: Decisiones rapidas, temas de seguridad, asuntos no negociables
+	- Servicial/Acomodativa: (Gana el otro)
+		- Baja asertividad, alta cooperación
+		- Se sacrifican propias necesidades por las de otros
+		- Cuando usar: Mantener relaciones, cuando el otro tiene razón, temas menores.
+	- Evasiva: (Posponer discusiones)
+		- Baja asertividad, baja cooperación
+		- Se evita conflicto
+		- Cuando usar: temas triviales, necesidad de tiempo para reflexionar
+	- Compromiso: (Ambas partes ceden)
+		- Moderada asertividad, moderada cooperacion
+		- Solucion "ganar-ganar" parcial
+		- Cuando usar: recursos limitados, solucion rapida necesaria
+	- Integradora (Todos ganan)
+		- Alta asertividad, alta cooperacion
+		- Busca satisfacer ambas partes
+		- Cuando usar: ambas partes son importantes, se necesita innovacion
+		- Aprovecha experticia de ambos - Resulta mejor solucion final - Mantiene buenas relaciones - Genera aprendizaje mutuo
+- Estructura presentaciones efectivas
+	- Hilo conductor esencial
+	- Componentes
+		- Introduccion
+		- Cuerpo
+		- Conclusion
+	- Consideraciones
+		- Orden logico
+		- Preparacion anticipada
+		- Gestion del tiempo
+		- Lenguaje apropiado
+		- Audiencia (adaptar el contenido a esta)
+
+4 a 7
+10 a 13
+15 y 16
+
