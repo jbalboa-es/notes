@@ -1,8 +1,8 @@
 #programming_languages
 #other
 ## Content table
-- [[#Chapter 0 Getting Started]]
-- [[#Chapter 1 C++ Basics]]
+> [[#Chapter 0 Getting Started]]
+> [[#Chapter 1 C++ Basics]]
 ## Getting Started
 - Para compilar
 ```bash
@@ -188,15 +188,15 @@ mejor usar gdb
 g++ -g -Wall -Wextra main.cpp -o programa
 
 
-#include <cassert>
+\#include <cassert>
 
 int main() {
     int x = 5;
     assert(x > 0); // ✅ pasa
-    assert(x < 0); // ❌ falla y detiene el programa
+    assert(x < 0); //  falla y detiene el programa
 }
 
-C++ tiene **tipos de datos fundamentales**:
+C++ tiene ** tipos de datos fundamentales ** :
 
 1. **Enteros (`int`)** → números sin decimales.
     

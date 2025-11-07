@@ -3,9 +3,6 @@
 Estudiante: Juan Balboa Espinoza
 # P1
 
-// Asumiendo que... donde definimos a este Adversario B del siguiente modo:
-//
-
 Para realizar esta demostración, supondremos que $SE$ no es IND-ROR seguro y con eso, demostraremos que tampoco es IND-CPA seguro.
 
 Asumiendo que  no es IND-ROR seguro, existe un adversario B que gana el juego IND-ROR contra  con ventaja significativa.
