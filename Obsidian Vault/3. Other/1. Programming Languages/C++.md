@@ -1,351 +1,294 @@
 #programming_languages
 #other
 ## Content table
-> [[#Chapter 0 Getting Started]]
-> [[#Chapter 1 C++ Basics]]
-## Getting Started
-- Para compilar
-```bash
-g++ main.cpp -o main
-# Se le puede añadir:
-# -std=c++17
-# -Wall -Wextra
-	# Para warnings
-```
-## Chapter 1: C++ Basics
-```C++
-int a = 5; // copy initialization
-int b(6);  // direct initialization
-int c{7};  // list initialization
+> [[#Capítulo 1]]
+ >	- *statement* y comentarios
+ >	- *variables*: inicialización y comportamiento indefinido
+ >	- identificadores
+ >	- `iostream`: `cin` y `cout`
+ >	- literal, operador y expresiones
+>[[#Capítulo 2]]
+ >	- funciones
+ >	- parámetros y scope
+ >	- declaración y definición
+ >	- separación en archivos: `.cpp` y `.h`
+ >	- `namespaces` y `#pragma once`
+>[[#Capítulo 3]]
+ >	- tipos de errores
+ >	- depuración básica
+ >	- depurador
+ >	- prevensiones
+>[[#Capítulo 4]]
+ >	- tipos de datos y `sizeof()`
+ >	- enteros
+ >	- decimales
+ >	- lógica y texto
+ >	- `if statements` y conversión de tipos
+>[[#Capítulo 5]]
+ >	- `const`
+ >	- `constexpr`
+ >	- `std::string`
+ >	- `std::string_view`
+>[[#Capítulo 6]]
+ >	- aritmética y precedencia
+ >	- (de/in)cremento
+ >	- operadores de lógica
+ >	- operador ternario
 
-#include <iostream>
-std::cout << "texto" << std::endl;
-std::cin >> variable;
-```
-copy: crea la variable y luego copia el valor
-	permite conversiones implicitas
-direct: 
-### Qué hace
-
-- Llama directamente al constructor o inicializador correspondiente.
-    
-- Es común en objetos o clases con constructores.
-    
+# Capítulo 1
+### 1. El Esqueleto del Programa
 
-### 🔹 Características
+- Todo programa de C++ se ejecuta comenzando por la función **`int main()`**.
+- El "cuerpo" de una función está delimitado por llaves **`{ }`**.
+- Una **declaración** (_statement_) es una instrucción individual y casi siempre termina con un punto y coma **`;`**.
+- Los **comentarios** son notas para humanos que el compilador ignora. Hay dos tipos: `//` (una línea) y `/* ... */` (multilínea).
 
-- Similar a la anterior, pero más eficiente (no crea una copia intermedia).
-    
-- También permite conversiones implícitas
+---
 
-LIST
-### Características
+### 2. Variables (Guardando Datos)
 
-- **Prohíbe conversiones peligrosas**:
-- Permite inicializar múltiples variables o estructuras:
-- Funciona igual para variables simples, structs, clases o arreglos.
+- Una **variable** es un "cajón" con nombre para almacenar datos (ej: `int edad`).
+- **Inicialización**: Es dar un valor a una variable _en el momento de crearla_. La forma moderna preferida es con llaves (ej: `int edad {30};`).
+- **Asignación**: Es dar un valor a una variable _después_ de que ya ha sido creada, usando el operador `=` (ej: `edad = 31;`).
+- **Comportamiento Indefinido**: Es el "monstruo" 👻 de C++. Ocurre si usas una variable que has declarado pero _nunca_ has inicializado. Contendrá un valor "basura" aleatorio y tu programa será impredecible. **¡Inicializa siempre tus variables!**
 
+---
 
-La inicialización con llaves `{}` es preferida porque **previene conversiones implícitas inseguras**:
-
-
-
-Si declaras una variable sin asignarle valor inicial, su contenido es **indeterminado (basura de memoria)**:
-
-
-Reglas:
-
-- Empiezan con letra o `_`, no con número.
-    
-- No tienen espacios.
-    
-- Son sensibles a mayúsculas.
-```C++
-camelCase
-snake_case
-```
+### 3. Reglas del Lenguaje
 
-papomudas
-Errores por sintaxis y por lógica
-g++ -g main.cpp -o main
-gdb ./main
+- **Identificadores**: Son los nombres que das a tus variables (ej: `edad`, `puntuacion_total`).
+    - Son **sensibles a mayúsculas** (`edad` no es lo mismo que `Edad`).
+    - No pueden empezar con números ni contener espacios (solo letras, números y `_`).
+- **Keywords**: Son palabras reservadas (ej: `int`, `return`, `void`) que no puedes usar como nombres de variables.
+- **Whitespace** (espacios, `TAB`, saltos de línea): El compilador (casi) los ignora. Se usan para formatear el código y hacerlo **legible para los humanos**.
 
-	break main
-	run
-	next
-	print x
-	quit
+---
 
-|Concepto|Explicación|
-|---|---|
-|**Breakpoint (punto de ruptura)**|Marca una línea donde el programa se detiene al depurar.|
-|**Usos**|Inspeccionar variables, verificar flujo, detectar errores antes de que ocurran.|
-|**Run normal**|Ejecuta todo el código hasta que termine o ocurra un error.|
-|**Run en modo debug**|Ejecuta bajo control del depurador, se detiene en breakpoints.|
-## Explicación detallada
+### 4. Interactuando con el Programa
 
-- `std::cin.fail()`  
-    → Devuelve `true` si la última operación de entrada **falló** (por ejemplo, leer un string en lugar de un número).
-    
-- `std::cin.clear()`  
-    → Limpia las **banderas de error** (`failbit`, `badbit`), dejando el flujo listo para usarse de nuevo.
-    
-- `std::cin.ignore(n, c)`  
-    → Descarta caracteres que quedaron en el buffer de entrada.
+- Para poder usar la entrada y salida, debes incluir la biblioteca de flujos: **`#include <iostream>`**.
+- **`std::cout`**: Se usa para **imprimir** en la pantalla (salida). Usa el operador de inserción `<<` (ej: `std::cout << "Hola";`).
+- **`std::cin`**: Se usa para **leer** desde el teclado (entrada). Usa el operador de extracción `>>` (ej: `std::cin >> edad;`).
+- **Saltos de línea**: `\n` (recomendado) y `std::endl` (que también vacía el búfer).
 
-## 2. Por qué `main()` **retorna 0**
+---
+### 5. Expresiones y Operadores
 
-La función `main()` es el **punto de entrada del programa**.  
-Cuando termina, devuelve un **código de salida** al **sistema operativo**.
+- **Literal**: Es un valor fijo escrito en el código (ej: `5` o `"Hola"`).
+- **Operador**: Es un símbolo que realiza una acción (ej: `+`, `-`, `*`, `/` para aritmética, o `<<`, `>>`, `=` que ya vimos).
+- **Expresión**: Es cualquier trozo de código que **produce un valor** (ej: `5`, `edad`, o `5 + edad`).
 
-Por convención:
+---
 
-- `return 0;` → indica que el programa **terminó correctamente**.
-    
-- Cualquier otro valor → indica **algún tipo de error**.
 
+# Capítulo 2
 
+### 1. ¿Qué son las Funciones?
 
-`std::endl` imprime un salto de línea y **vacia el búfer** (útil pero más lento).  
-También puedes usar `'\n'` (más rápido):
+- Son **bloques de código reutilizables** (mini-recetas) que realizan una tarea específica (como `sumar` o `saludar`).
+- Hacen el código más **legible** y fácil de mantener (principio **DRY**: "No te repitas").
+- Hay dos tipos principales:
+    - **Funciones `void`**: _Hacen_ algo (ej: `imprimirBienvenida()`) pero **no devuelven** un valor.
+    - **Funciones con retorno de valor**: _Calculan_ algo y **devuelven** un resultado usando la palabra clave `return` (ej: `int sumar(...)`).
 
-Forward declaration
+---
+### 2. Parámetros y Scope
 
-Overloading:
-C++ permite tener varias funciones **con el mismo nombre** siempre que sus **parámetros sean distintos**.
+- **Parámetros** (ej: `int a, int b`): Son los "ingredientes" que una función necesita para trabajar. Se definen en la función.
+- **Argumentos** (ej: `sumar(10, 20)`): Son los valores _reales_ que le pasas a la función cuando la llamas.
+- **Scope Local**: Las variables creadas _dentro_ de una función (incluyendo sus parámetros) **nacen y mueren** dentro de esa función. Son invisibles para `main` y otras funciones.
 
-`#include` inserta el contenido de un archivo.  
-`#define` crea macros o constantes simbólicas (aunque se prefieren `const` o `constexpr` hoy en día).
+---
 
-- Los `.h` contienen **declaraciones**.
-    
-- Los `.cpp` contienen **definiciones**.
-    
-- `#include` copia el contenido del `.h` en el archivo actual.
+### 3. Declaraciones vs. Definiciones
 
-Header guards
-#ifndef ADD_H   // Si no está definido
-#define ADD_H   // Defínelo
+- **Definición**: Es el código completo de la función, con su cuerpo `{...}`.
+- **Declaración (o "Promesa")**: Es solo la "firma" de la función (ej: `int sumar(int a, int b);`). Le dice al compilador que la función existe, aunque esté definida más abajo. Es vital para organizar el código.
 
-int add(int a, int b);
+---
 
-#endif          // Fin del guardia
+### 4. Separación en Archivos
 
+- ¡No pongas todo en `main.cpp`!
+- **Archivos `.cpp` (Fuente)**: Contienen las _definiciones_ (el "cómo"). Es el código de trabajo.
+- **Archivos `.h` (Cabecera/Header)**: Contienen las _declaraciones_ (las "promesas"). Son el "menú" que le dices a otros archivos qué funciones están disponibles.
+- **`#include`**: Es la directiva del **preprocesador** que "copia y pega" el contenido de un archivo `.h` en tu archivo `.cpp` antes de compilar.
 
-g++ -c main.cpp   # compila sin enlazar (genera main.o)
-g++ -c add.cpp    # compila sin enlazar (genera add.o)
-g++ main.o add.o -o programa  # enlaza los objetos
+---
 
-g++ main.cpp add.cpp -o programa
+### 5. Namespaces y Header Guards
 
-| Concepto                    | Explicación                                                                |
-| --------------------------- | -------------------------------------------------------------------------- |
-| **Lectura secuencial**      | El compilador lee el código de arriba a abajo.                             |
-| **Declaración (prototipo)** | Informa al compilador que una función existe y cómo se usa.                |
-| **Definición**              | Contiene el cuerpo real de la función.                                     |
-| **Forward declaration**     | Permite usar funciones definidas más abajo en el código o en otro archivo. |
-| **Linker**                  | Une las declaraciones con las definiciones reales al final.                |
-Errores de compilacion
-	de enlace
-	de ejecucion
-	lógicos
+- **Namespaces (ej: `std::`)**: Son "apellidos" que le ponemos a nuestras funciones (ej: `Matematicas::sumar`) para evitar **colisiones de nombres** cuando dos funciones se llaman igual.
+- **`#pragma once`**: Es un **Header Guard**. Se pone al inicio de _cada_ archivo `.h` para evitar que el preprocesador lo incluya dos veces por error, lo cual causaría un error de compilación.
 
-g++ -g main.cpp -o programa
--g incluye info de depuracion
+---
 
-mejor usar gdb
+# Capítulo 3
 
-- `next` → ejecutar la siguiente línea de código (no entra en funciones).
-    
-- `step` → entra dentro de funciones llamadas para inspeccionarlas.
+### 1. Conoce a tu Enemigo: Tipos de Errores
 
-- `next` → ejecuta **la siguiente línea** y se detiene después, **sin entrar en funciones llamadas**.
-    
-- `step` → ejecuta **la siguiente línea**, pero **entra dentro de la función llamada** si hay alguna.
+- **Errores de Sintaxis:** Son errores "gramaticales" (como olvidar un `;` o escribir mal `retun`). Tu código **no compila**. Son los "fáciles" porque el compilador te avisa dónde está el problema.
+- **Errores Semánticos (de Lógica):** Tu código compila perfectamente, pero **hace lo incorrecto** (ej. sumas cuando querías restar, o calculas un promedio dividiendo por 3 en vez de por 2). Estos son los _bugs_ difíciles y el objetivo principal de la depuración.
 
+---
 
-(gdb) next
-# Ejecuta: int x = 5; se detiene antes de la línea int y = 10;
+### 2. Tácticas de Detective "Manuales"
 
-(gdb) next
-# Ejecuta: int y = 10; se detiene antes de: int z = add(x, y);
+Antes de usar herramientas complejas, usamos nuestro cerebro y técnicas simples:
 
-(gdb) step
-# Como ahora se llama add(x, y), entra dentro de la función add()
-# Se detiene en la primera línea de add()
+- **El Proceso Mental:** 1. Reproduce el error, 2. Formula una hipótesis (ej. "creo que `b` es cero"), 3. Prueba la hipótesis, 4. Arréglalo y verifica.
+- **Depuración con `std::cout`**: La técnica clásica. Pones "micrófonos" (`cout << "DEBUG: b = " << b;`) en tu código para imprimir los valores de tus variables y ver dónde se tuercen.
+- **Aislar el Problema**: Usar `/* ... */` para "apagar" bloques de código. Si el error desaparece, el culpable está en el bloque que comentaste.
 
-(gdb) next
-# Ejecuta la línea return a + b; y vuelve a main
+---
 
-(gdb) continue
-# Termina la ejecución del programa hasta el final
+### 3. La Herramienta Profesional: El Depurador Integrado 🕵️‍♂️
 
-- `next` es “paso sobre”: útil para avanzar líneas sin entrar en funciones.
-    
-- `step` es “paso dentro”: útil para inspeccionar qué pasa dentro de funciones.
+Esta es la herramienta más potente de tu IDE (Visual Studio, VS Code, etc.). Te permite **pausar** tu programa en mitad de la ejecución y espiarlo "a cámara lenta".
 
+- **Breakpoints (Puntos de Interrupción)**: Pones una señal de "STOP" 🛑 en una línea de código. El programa se ejecutará y se **congelará** justo antes de esa línea.
+- **Stepping (Paso a Paso)**: Una vez congelado, usas `F10 (Step Over)` para avanzar línea por línea, viendo exactamente qué hace el programa.
+- **Ventanas "Watch" (Inspección)**: Mientras avanzas "paso a paso", puedes ver cómo los **valores de tus variables cambian en tiempo real**. Aquí es donde "ves" el bug (ej. ves que `b` se convierte en `0`).
+- **Call Stack (Pila de Llamadas)**: Es el "rastro de migas de pan" 🍞. Te muestra el historial de funciones (ej. `main()` llamó a `funcionA()` que llamó a `funcionB()`), para que sepas _cómo_ llegaste al código problemático.
 
-g++ -g -Wall -Wextra main.cpp -o programa
+---
 
+### 4. Medicina Preventiva 🩺
 
-\#include <cassert>
+La mejor forma de depurar es escribir código que sea difícil de romper.
 
-int main() {
-    int x = 5;
-    assert(x > 0); // ✅ pasa
-    assert(x < 0); //  falla y detiene el programa
-}
+- **¡Inicializa siempre tus variables!** (ej. `int x {0};` en lugar de `int x;`). Esto elimina los errores de "basura aleatoria".
+- **Escribe código defensivo**: Desconfía de la entrada del usuario. Comprueba si un divisor es `0` _antes_ de intentar dividir.
+- **Mantén tus funciones cortas** y que hagan una sola cosa. Es más fácil depurar una función de 5 líneas que una de 50.
 
-C++ tiene ** tipos de datos fundamentales ** :
+---
 
-1. **Enteros (`int`)** → números sin decimales.
-    
-2. **Caracteres (`char`)** → un solo carácter (ASCII).
-    
-3. **Booleanos (`bool`)** → `true` o `false`.
-    
-4. **Punto flotante (`float`, `double`, `long double`)** → números con decimales.
-    
+# Capítulo 4
 
-Todos estos tipos se pueden **modificar con `signed`, `unsigned`, `short`, `long`** para ajustar el tamaño y rango.
+### 1. Qué es un Tipo (y cuánto ocupa)
 
-int 4 bytes en sistemas modernos
+- Un **tipo de dato** le dice al compilador qué tipo de valor guardar (`int`, `double`, `bool`, `char`...) y cuánta memoria reservar.
+- Usamos el operador **`sizeof(tipo)`** para preguntar cuántos **bytes** ocupa un tipo en la memoria (ej. `sizeof(int)` suele ser 4).
+- **`void`** es el "anti-tipo": significa "sin valor" y se usa para funciones que no devuelven nada.
 
-unsigned int u = 3000000000; // permitido
-int i = 3000000000;          // ❌ overflow
+---
 
-char c = 'A';
-std::cout << c + 1; // 66 → 'B'
+### 2. La Familia de los Enteros (Números sin decimal)
 
-También existen:
+- **`int`** es el tipo por defecto para números con signo (positivos y negativos).
+- También existen `short` (más pequeño) y `long long` (más grande).
+- **¡Peligro `unsigned`!** Los tipos `unsigned` (ej. `unsigned int`) solo guardan positivos. Son peligrosos porque si intentas restar y el resultado es negativo, sufren **subdesbordamiento** (_underflow_) y dan un número gigante (¡como viste en el cuestionario!). **Recomendación: Evitarlos.**
+- **Forma Moderna:** Los enteros de ancho fijo (ej. **`std::int32_t`**) de `<cstdint>` te garantizan _exactamente_ cuántos bits ocupan (ej. 32 bits = 4 bytes), haciendo tu código más portable.
 
-- `signed char`
-    
-- `unsigned char`
-    
-- `wchar_t` (caracteres “grandes”, Unicode básico)
+---
+### 3. La Familia de los Decimales (Punto Flotante)
 
-true=1 y false=0
+- **`float`**: 4 bytes, rápido, pero menos preciso (unas 7 cifras). Literal: `3.14f`.
+- **`double`**: 8 bytes, más lento, pero mucho más preciso (unas 15 cifras). Es el **tipo por defecto** para decimales.
+- **¡Peligro de Precisión!** Los `double` y `float` son **imprecisos** por naturaleza. Nunca pueden representar perfectamente algunos decimales (como `0.1`).
+- **Regla de Oro:** **Nunca compares dos `double` con `==`**. (¡Como viste en el cuestionario!).
 
-|Tipo|Tamaño aproximado|Precisión|
-|---|---|---|
-|`float`|4 bytes|~7 dígitos|
-|`double`|8 bytes|~15 dígitos|
-|`long double`|16 bytes|~19 dígitos|
+---
 
-1.0      // double
-1.0f     // float
-1.0L     // long double
-100U     // unsigned int
-100LL    // long long
+### 4. Lógica y Texto
 
+- **`bool`**: El tipo más simple. Solo puede ser **`true`** o **`false`**. Es el combustible de la lógica. (Cuando se imprime, `true` es `1` y `false` es `0`).
+- **`char`**: Guarda un **único carácter** (letra, número o símbolo). Usa **comillas simples** (ej. `'A'`, `'!'`, `'5'`). Internamente, es solo un `int` de 1 byte que se interpreta según la tabla **ASCII**.
 
-auto type specifier
+---
 
-int a = 5;
-decltype(a) b = 10; // b es int
+### 5. Uso y Mezcla (¡Lo más importante!)
 
-`sizeof` devuelve **cuántos bytes ocupa un tipo o variable**:
+- **`if statements`**: ¡Tu primera herramienta de lógica! `if (condición)` ejecuta el código en `{...}` solo si la `condición` es `true`.
+- **Conversión de Tipos**:
+    - **El Bug:** La **división de enteros**. Si divides dos `int` (ej. `5 / 2`), C++ corta los decimales. El resultado es `2`, no `2.5`.
+    - **La Solución:** La conversión explícita. Le decimos al compilador que trate un número como `double` _antes_ de la división.
+    - **Forma Correcta:** **`static_cast<double>(variable)`**. (Ej: `double prom = static_cast<double>(5) / 2;` // da `2.5`).
 
-double d = 3.14;
-int i = static_cast<int>(d); // 3
+---
 
-const int DAYS_IN_WEEK = 7;
-DAYS_IN_WEEK = 8; // ❌ error: no se puede modificar
+# Capítulo 5
 
-Convención: se usan **mayúsculas con guiones bajos** (`DAYS_IN_WEEK`) para constantes globales
+### 1. Constantes (`const`)
 
-`constexpr` indica que **el valor se puede evaluar en tiempo de compilación**:
+- **Evita los "Números Mágicos"**: No escribas `3.14159` en tu código. Es difícil de leer y de mantener.
+- **Usa `const`**: Es el "candado" 🔒 para variables. `const double PI {3.14159};` le da un nombre (legibilidad) y se asegura de que **nunca cambie** (seguridad y mantenimiento).
+- **`const` es una promesa de "solo lectura"** que se aplica una vez que la variable se inicializa (lo cual puede ocurrir en tiempo de ejecución, ej: `const int edad { variable_de_cin };`).
 
-char name[] = "Juan";
+---
 
-#include <string>
-#include <iostream>
+### 2. Constantes de Compilación (`constexpr`)
 
-std::string name = "Juan";
-std::cout << name << std::endl;
+- **`constexpr`** es un "súper-candado" 🚀. Es una promesa más fuerte: el valor **debe** ser conocido en **tiempo de compilación** (antes de que el programa se ejecute).
+- **Optimización**: `constexpr int SEGUNDOS_POR_DIA {60*60*24};` se calcula **UNA VEZ** por el compilador (en la "fábrica") y se "hornea" el resultado (`86400`) en el programa. El usuario final nunca tiene que calcularlo.
+- **Regla Moderna:** Usa `constexpr` siempre que el valor pueda ser conocido en la compilación; usa `const` para todo lo demás que no deba cambiar.
 
-OPERATIONS WITH std::string
-std::string a = "Hola";
-std::string b = " Mundo";
+---
 
-std::string c = a + b;         // concatenación
-std::cout << c.length() << '\n'; // longitud
-std::cout << c[1] << '\n';    // acceso por índice (0-based)
+### 3. Texto con `std::string`
 
-|Función / operador|Descripción|Ejemplo|
-|---|---|---|
-|`+`|Concatenar strings|`s3 = s1 + s2;`|
-|`+=`|Concatenación abreviada|`s1 += s2;`|
-|`.length()` / `.size()`|Devuelve longitud|`s.length();`|
-|`.empty()`|Verifica si está vacía|`s.empty();`|
-|`.substr(pos, len)`|Substring|`s.substr(0,3);`|
-|`.find(str)`|Buscar substring|`s.find("abc");`|
-|`.replace(pos, len, str)`|Reemplazar parte|`s.replace(0,3,"xyz");`|
-|`[i]`|Acceso a carácter|`s[0] = 'A';`|
-|`.c_str()`|Devuelve `const char*`|`printf("%s", s.c_str());`|
-|`.append(str)`|Agrega al final|`s.append("abc");`|
-|`.erase(pos, len)`|Elimina parte|`s.erase(0,3);`|
+- ¡La forma moderna de manejar texto! (Olvídate de `char` sueltos).
+- Tienes que incluir el header: **`#include <string>`**.
+- Es un "contenedor" que maneja toda la memoria por ti.
+- Puedes **unir (concatenar) strings** con el operador **`+`**.
+- Puedes leer texto del usuario con `std::cin >> mi_string;` (lee hasta el primer espacio) o **`std::getline(std::cin, mi_string);`** (lee la línea completa).
 
-const char* ptr = "Hola mundo";
-std::cout << ptr << '\n';
+---
 
-- `std::cout` sabe **que ptr apunta a un C-string terminado en `\0`**.
-    
-- No imprime la dirección de memoria, sino **el contenido hasta el `\0`**.
-    
-- Si no hubiera `\0`, imprimiría basura o hasta crash.
-    
+### 4. Vistas de Texto con `std::string_view`
 
-> Resumen: `std::cout` **interpreta `char*` como string**, no como dirección
+- Tienes que incluir el header: **`#include <string_view>`**.
+- **No es un string**. Es un "visor" o "tarjeta de biblioteca" 💳 súper ligero que **solo mira** a un `std::string` que ya existe.
+- **Optimización Clave**: Pasa `std::string_view` a tus funciones para **evitar copias lentas**. Es ideal para parámetros de función que solo necesitan _leer_ el texto.
+- **Regla Moderna:** Pasa `std::string_view` por defecto; solo pasa `std::string` si la función necesita _modificar_ o _guardar_ el texto.
 
-#include <cstring>
-#include <iostream>
+---
 
-int main() {
-    char name[10];
-    strcpy(name, "Juan");  // Copia "Juan" + '\0' en name
-    std::cout << name << '\n'; // imprime "Juan"
-}
 
-**Nota importante:**
+# Capítulo 6
+### 1. Aritmética y Precedencia
 
-- El array destino (`name`) debe ser **lo suficientemente grande**.
-    
-- `strcpy` **no comprueba límites**, así que si copias algo más grande que el array, crash seguro.
+- **Precedencia:** Es el "orden de operaciones". C++ hace la multiplicación (`*`), división (`/`) y módulo (`%`) **antes** que la suma (`+`) y la resta (`-`).
+- **Paréntesis `( )`:** Son tus mejores amigos. Tienen la precedencia más alta. **Usa siempre paréntesis** para que tu código sea claro y no tengas que memorizar el orden de las operaciones.
+- **División de Enteros:** ¡Cuidado! Cuando divides dos `int`, C++ **corta los decimales**. `7 / 2` da como resultado `3`.
+- **Operador Módulo (`%`):** Es el **resto** de una división de enteros. `7 % 3` es `1`. Su uso más común es saber si un número es par: `if (numero % 2 == 0)`.
+- **Potencias:** C++ **NO** usa el símbolo `^` para potencias (¡ese es un operador binario!). Para potencias, usa `std::pow()` (de `<cmath>`) o multiplica a mano (ej. `x * x`).
 
+---
 
-- **Aritméticos**: `+`, `-`, `*`, `/`, `%`
-    
-- **Asignación**: `=`, `+=`, `-=`, `*=`, `/=`, `%=`
-    
-- **Incremento/decremento**: `++`, `--`
-    
-- **Relacionales**: `==`, `!=`, `<`, `>`, `<=`, `>=`
-    
-- **Lógicos**: `&&`, `||`, `!`
-- Evaluación **corta-circuito**: si el primer operando determina el resultado, el segundo no se evalúa.
-    
-- **Bit a bit (bitwise)**: `&`, `|`, `^`, `~`, `<<`, `>>`
-- x       = 00000101  (5)
-~x      = 11111010
+### 2. Incremento y Efectos Secundarios (¡Peligro!)
 
-Número negativo → tomar **complemento a dos** del positivo:
+- **`++x` (Pre-incremento):** Primero incrementa `x` en 1, y luego la expresión evalúa al _nuevo_ valor.
+- **`x++` (Post-incremento):** Primero, la expresión evalúa al valor _original_ de `x`, y _después_ incrementa `x` en 1.
+- **Efecto Secundario:** Es cuando un operador modifica el estado (ej. cambia el valor de una variable). `++` y `--` tienen efectos secundarios.
+- **Regla VITAL (Comportamiento Indefinido 👻):** **Nunca** uses una variable que estás incrementando/decrementando más de una vez en la misma declaración (ej. `y = ++x + x;`). El orden es indefinido y tu programa será impredecible. ¡Sepáralo siempre en líneas distintas!
 
-- Invertir todos los bits.
-    
-- Sumar 1.
-Los números negativos se representan en **complemento a dos**, así que `~x` de un positivo `x` siempre será **-(x+1)**.
+---
 
-    
-- **Condicional**: `?:` (ternario)
-- Sintaxis: `condición ? valor_si_true : valor_si_false`
-    
-- **Coma**: `,` (evalúa y devuelve el último valor)
-- int x = (1, 2, 3); 
-std::cout << x << '\n'; // 3
+### 3. Lógica (Comparación y Conexión)
 
+- **Operadores Relacionales:** Son las "preguntas". Devuelven `true` o `false`.
+    - `==` (Igual a)
+    - `!=` (No igual a / Distinto)
+    - `<`, `>`, `<=`, `>=`
+- **Peligro `double`:** **Nunca** uses `==` o `!=` para comparar `double` o `float`. Debido a la imprecisión decimal (ej. `0.1 + 0.1 + 0.1` no es `0.3`), estas comparaciones casi siempre fallan.
+- **Operadores Lógicos:** Combinan múltiples `bool`s.
+    - **`&&` (Y / AND):** `true` solo si **ambos** lados son `true`.
+    - **`||` (O / OR):** `true` si **al menos uno** de los lados es `true`.
+    - **`!` (NO / NOT):** Invierte el valor (`!true` es `false`).
 
+---
+
+### 4. El "Mini-If" (Operador Condicional)
+
+- Es un atajo para un `if-else` simple que asigna un valor.
+- Sintaxis: `(condición) ? (valor_si_true) : (valor_si_false)`.
+- Ejemplo: `std::string tipo = (edad >= 18) ? "Adulto" : "Menor";`.
+- **Uso:** Genial para asignaciones simples, pero no lo uses para lógica compleja (ahí usa un `if-else` normal por claridad).
+
+---
+
+# Capítulo 7
 
 
 
